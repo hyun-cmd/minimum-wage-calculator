@@ -1,51 +1,97 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2487.5">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최저시급 계산기</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .calculator {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;div id="calculator-container"&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('calculator-container').innerHTML = `</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;최저시급 계산기&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;label for="hourlyWage"&gt;시간당 최저임금 (원):&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="number" id="hourlyWage" placeholder="예: 10030" style="width: 100%; padding: 10px; margin-top: 10px;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;label for="weeklyHours"&gt;주당 근무 시간:&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="number" id="weeklyHours" placeholder="예: 40" style="width: 100%; padding: 10px; margin-top: 10px;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;label&gt;&lt;input type="checkbox" id="includeWeeklyAllowance"&gt; 주휴수당 포함&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="calculateSalary()" style="width: 100%; padding: 10px; margin-top: 10px; background: #007bff; color: white; border: none; border-radius: 4px;"&gt;계산하기&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div style="margin-top: 20px; padding: 10px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 4px;" id="result"&gt;결과가 여기에 표시됩니다.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>function calculateSalary() {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const hourlyWage = parseFloat(document.getElementById('hourlyWage').value);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const weeklyHours = parseFloat(document.getElementById('weeklyHours').value);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const includeWeeklyAllowance = document.getElementById('includeWeeklyAllowance').checked;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>if (isNaN(hourlyWage) || isNaN(weeklyHours)) {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>alert('올바른 숫자를 입력해주세요.');</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>return;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const weeklyPay = hourlyWage * weeklyHours;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const weeklyAllowance = includeWeeklyAllowance ? hourlyWage * (weeklyHours / 40) * 8 : 0;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const totalWeeklyPay = weeklyPay + weeklyAllowance;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const monthlyPay = totalWeeklyPay * 4.345;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const yearlyPay = monthlyPay * 12;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('result').innerHTML = `</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;&lt;strong&gt;주급:&lt;/strong&gt; ${totalWeeklyPay.toLocaleString()} 원&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;&lt;strong&gt;월급:&lt;/strong&gt; ${monthlyPay.toLocaleString()} 원&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;&lt;strong&gt;연봉:&lt;/strong&gt; ${yearlyPay.toLocaleString()} 원&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>`;</p>
-<p class="p1">&lt;/script&gt;</p>
+    <div class="calculator">
+        <h2>최저시급 계산기</h2>
+        <label for="hourlyWage">시간당 최저임금 (원):</label>
+        <input type="number" id="hourlyWage" placeholder="예: 10030">
+
+        <label for="weeklyHours">주당 근무 시간:</label>
+        <input type="number" id="weeklyHours" placeholder="예: 40">
+
+        <label for="includeWeeklyAllowance">
+            <input type="checkbox" id="includeWeeklyAllowance">
+            주휴수당 포함
+        </label>
+
+        <button onclick="calculateSalary()">계산하기</button>
+
+        <div class="result" id="result">
+            결과가 여기에 표시됩니다.
+        </div>
+    </div>
+
+    <script>
+        function calculateSalary() {
+            const hourlyWage = parseFloat(document.getElementById('hourlyWage').value);
+            const weeklyHours = parseFloat(document.getElementById('weeklyHours').value);
+            const includeWeeklyAllowance = document.getElementById('includeWeeklyAllowance').checked;
+
+            if (isNaN(hourlyWage) || isNaN(weeklyHours)) {
+                alert('올바른 숫자를 입력해주세요.');
+                return;
+            }
+
+            const weeklyPay = hourlyWage * weeklyHours;
+            const weeklyAllowance = includeWeeklyAllowance ? hourlyWage * (weeklyHours / 40) * 8 : 0;
+            const totalWeeklyPay = weeklyPay + weeklyAllowance;
+            const monthlyPay = totalWeeklyPay * 4.345; // 평균 월별 주수
+            const yearlyPay = monthlyPay * 12;
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <p><strong>주급:</strong> ${totalWeeklyPay.toLocaleString()} 원</p>
+                <p><strong>월급:</strong> ${monthlyPay.toLocaleString()} 원</p>
+                <p><strong>연봉:</strong> ${yearlyPay.toLocaleString()} 원</p>
+            `;
+        }
+    </script>
 </body>
 </html>
